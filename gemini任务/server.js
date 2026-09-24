@@ -5,10 +5,10 @@ const server = http.createServer((req, res) => {
 
   if (req.url === '/') {
     res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-    res.end('欢迎来到首页！(状态码: 200)');
+    res.end('欢迎(状态码: 200)');
   } else {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-    res.end('抱歉，你要找的资源不存在！(状态码: 404)');
+    res.end('资源不存在(状态码: 404)');
   }
 });
 
