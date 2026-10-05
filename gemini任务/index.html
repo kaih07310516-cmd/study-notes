@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>每日名言看板</title>
+
+    <style>
+        body {
+      font-family: sans-serif;
+      background: #f7f9fa;
+      height: 80vh;
+      /* Flexbox 经典居中三件套 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      text-align: center;
+    }
+
+    #quote-author {
+      color: #666;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+    </style>
+  </head>
+  
+  <body>
+    <div class="card">
+        <h2 id="quote-text">点击获取名言</h2>
+        <p id="quote-author"></p>
+        <button onclick="fetchQuote()">刷新</button>
+    </div>
+    <script>
+        async function fetchQuote() {
+            try{
+                const res = await fetch('http://127.0.0.1:8080/api/quote');
+                const data = await res.json();
+                document.getElementById('quote-text').innerText = `“${data.quote}”`;
+                document.getElementById('quote-author').innerText = `—— ${data.author}`;
+            }catch(err){
+              alert('无法连接')
+            }
+        }
+    </script>
+  </body>
+</html>
